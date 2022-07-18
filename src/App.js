@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const api = {
   key: '439d4b804bc8187953eb36d2a8c26a02',
@@ -18,7 +18,7 @@ function App() {
     })
   }, [setWeather, setLocation]);
 
-  const searchLocation = (e) => {
+  const searchLocation = useCallback((e) => {
     if (e.key === 'Enter') {
       fetch(`${api.base}?q=${location}&appid=${api.key}`)
       .then(res => res.json())
@@ -27,7 +27,7 @@ function App() {
         setLocation('');
       });
     }
-  }
+  }, [setWeather, setLocation]);
 
   return (
     <div className="app">
