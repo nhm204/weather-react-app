@@ -6,17 +6,17 @@ const api = {
 }
 
 function App() {
-  const [location, setLocation] = useState('');
-  const [weather, setWeather] = useState({});
+  const [ location, setLocation ] = useState('ho chi minh');
+  const [ weather, setWeather ] = useState({});
 
   useEffect(() => {
-    fetch(`${api.base}?q=ho chi minh&appid=${api.key}`)
+    fetch(`${api.base}?q=${location}&appid=${api.key}`)
     .then(res => res.json())
     .then(res => {
       setWeather(res);
       setLocation('');
     })
-  }, [setWeather, setLocation]);
+  }, []);
 
   const searchLocation = useCallback((e) => {
     if (e.key === 'Enter') {
@@ -27,17 +27,18 @@ function App() {
         setLocation('');
       });
     }
-  }, [setWeather, setLocation]);
+  }, [location, setWeather, setLocation]);
 
   return (
     <div className="app">
       <header className="header">
-        <input className="searchbar" 
-               type="text" 
-               placeholder="Search location..." 
-               onChange={e => setLocation(e.target.value)} 
-               value={location} 
-               onKeyPress={searchLocation} 
+        <input 
+          className="searchbar" 
+          type="text" 
+          placeholder="Search location..." 
+          value={location} 
+          onChange={e => setLocation(e.target.value)} 
+          onKeyPress={searchLocation} 
         />
       </header>
       <main className="container">
