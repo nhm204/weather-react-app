@@ -46,24 +46,24 @@ function App() {
           <div>
             <div className="location">{weather.name}</div>
             {weather.main ? <h1 className="temp--celsius">{Math.round(weather.main.temp)}&deg;C</h1> : <h1 className="temp--celsius">No data</h1>}
-            {weather.main ? <h2 className="temp--fahrenheit">{(weather.main.temp * (9 / 5) + 32).toFixed(2)}&deg;F</h2> : null}
+            {weather.main && <h2 className="temp--fahrenheit">{(weather.main.temp * (9 / 5) + 32).toFixed(2)}&deg;F</h2>}
           </div>
           <div className="top-right">
-            {weather.weather ? <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`} alt="weather" width="150px"/> : null}
-            {weather.weather ? <div className="description">{weather.weather[0].main} - {weather.weather[0].description}</div> : null}
+            {weather.weather && <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`} alt="weather" width="150px"/>}
+            {weather.weather && <div className="description">{weather.weather[0].main} - {weather.weather[0].description}</div>}
           </div>
         </div>
         <div className="bottom">
           <div className="feel">
-            {weather.main ? <p>{Math.round(weather.main.feels_like)}&deg;C</p> : null}
+            {weather.main && <p>{Math.round(weather.main.feels_like)}&deg;C</p>}
             Real Feel
           </div>
           <div className="humidity">
-            {weather.main ? <p>{weather.main.humidity}%</p> : null}
+            {weather.main && <p>{weather.main.humidity}%</p>}
             Humidity
           </div>
           <div className="wind">
-            {weather.main ? <p>{weather.wind.speed} km/h</p> : null}
+            {weather.main && <p>{weather.wind.speed} km/h</p>}
             Wind Speed
           </div>
         </div>
